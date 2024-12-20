@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Homepage from './components/HomePage';
+import Homepage from './pages/HomePage';
 import Authentications from './pages/Authentications';
 import { Signin } from './pages/Signin';
 import { Signup } from './pages/Signup';

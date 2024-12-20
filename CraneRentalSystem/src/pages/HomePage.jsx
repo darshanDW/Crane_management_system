@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useRef, useState } from 'react';
 import { ClipboardList, Package, Users, PenToolIcon as Tool, ArrowRight, Menu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -45,39 +46,55 @@ const Homepage = () => {
         </div>
     );
 };
-
 const Header = ({ scrollToSection, featuresRef, aboutRef, contactRef, handleGetStarted, openMenu, setOpenMenu, menuAnchor, setMenuAnchor }) => (
     <motion.header
-        className="bg-blue-600 text-white shadow-lg fixed w-full z-20 top-0 left-0"
+        className="bg-white text-gray-900 shadow-md fixed w-full z-20 top-0 left-0"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: 'spring', stiffness: 120, damping: 20 }}
     >
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+            {/* Logo Section */}
             <div className="flex items-center">
-                {/* Use the crane.svg from the public directory */}
                 <img
-                    src="/crane.svg" // Path to the file in the public directory
+                    src="/crane.svg"
                     alt="Crane Logo"
-                    className="h-9 w-8 object-contain mr-3 mb-3"
+                    className="h-9 w-8 object-contain mr-3"
                 />
-                <h1 className="text-2xl font-bold">CraneRent Pro</h1>
+                <h1
+                    className="text-2xl font-extrabold tracking-wide text-blue-600 cursor-pointer"
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >
+                    CraneRent Pro
+                </h1>
+
+
             </div>
 
+            {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-6">
                 {['Features', 'About', 'Contact'].map((item, index) => (
                     <motion.button
                         key={item}
                         onClick={() => scrollToSection([featuresRef, aboutRef, contactRef][index])}
-                        className="text-white hover:text-yellow-400 transition duration-300 text-lg font-medium"
+                        className="text-lg font-medium hover:text-blue-600 transition duration-300"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.95 }}
                     >
                         {item}
                     </motion.button>
                 ))}
-                
+                <motion.button
+                    onClick={handleGetStarted}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg text-lg font-semibold hover:bg-blue-500 transition duration-300"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    Get Started
+                </motion.button>
             </nav>
+
+            {/* Mobile Navigation */}
             <div className="md:hidden">
                 <IconButton
                     onClick={(event) => {
@@ -104,14 +121,18 @@ const Header = ({ scrollToSection, featuresRef, aboutRef, contactRef, handleGetS
                     }}
                 >
                     {['Features', 'About', 'Contact', 'Get Started'].map((item, index) => (
-                        <MenuItem key={item} onClick={() => {
-                            setOpenMenu(false);
-                            if (index < 3) {
-                                scrollToSection([featuresRef, aboutRef, contactRef][index]);
-                            } else {
-                                handleGetStarted();
-                            }
-                        }}>
+                        <MenuItem
+                            key={item}
+                            onClick={() => {
+                                setOpenMenu(false);
+                                if (index < 3) {
+                                    scrollToSection([featuresRef, aboutRef, contactRef][index]);
+                                } else {
+                                    handleGetStarted();
+                                }
+                            }}
+                            className="text-gray-800 hover:bg-gray-200 transition duration-300"
+                        >
                             {item}
                         </MenuItem>
                     ))}
@@ -122,27 +143,33 @@ const Header = ({ scrollToSection, featuresRef, aboutRef, contactRef, handleGetS
 );
 
 const HeroSection = ({ handleGetStarted }) => (
-    <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-32 md:py-48 flex items-center justify-center relative overflow-hidden mt-8">
+    <section className="bg-gradient-to-r text-white py-32 md:py-48 flex items-center relative overflow-hidden">
         <div className="absolute inset-0 z-0">
-            <img src="/crane_bg.jpg" alt="Crane" className="w-full h-full mt-5 object-cover" />
+            <img src="/crange_bg.jpg" alt="Crane" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black opacity-40" />
         </div>
         <motion.div
-            className="container mx-auto px-4 text-center relative z-10"
+            className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between relative z-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
         >
-            <h2 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Crane Rental Management System</h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto leading-relaxed">Streamline your crane rental operations with our comprehensive management solution. Manage contracts, inventory, customers, and maintenance all in one place.</p>
-            <motion.button
-                onClick={handleGetStarted}
-                className="bg-white text-blue-600 px-8 py-4 rounded-md font-bold transition duration-300 flex items-center mx-auto hover:bg-blue-500 hover:text-white"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-            >
-                Get Started
-                <ArrowRight className="ml-2" />
-            </motion.button>
+            <div className="max-w-lg text-left">
+                <h2 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Crane Rental Management System</h2>
+                <p className="text-xl mb-8 leading-relaxed">
+                    Streamline your crane rental operations with our comprehensive management solution. Manage contracts, inventory, customers, and maintenance all in one place.
+                </p>
+                <motion.button
+                    onClick={handleGetStarted}
+                    className="bg-white text-blue-600 px-6 py-3 rounded-md font-bold transition duration-300 flex items-center hover:bg-blue-500 hover:text-white"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    Get Started
+                    <ArrowRight className="ml-2" />
+                </motion.button>
+            </div>
+
         </motion.div>
     </section>
 );

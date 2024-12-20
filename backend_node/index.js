@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors")
 const mainroute = require('./route/index')
 const cranespageroute = require('./route/cranespage')
-const chatroute = require('./route/chatroute')
+// const chatroute = require('./route/chatroute')
 // const videopage = require('./route/videopage')
 
 const app = express();
