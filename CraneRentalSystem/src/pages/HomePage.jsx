@@ -155,8 +155,8 @@ const HeroSection = ({ handleGetStarted }) => (
             transition={{ duration: 0.8 }}
         >
             <div className="max-w-lg text-left">
-                <h2 className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Crane Rental Management System</h2>
-                <p className="text-xl mb-8 leading-relaxed">
+                <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">Crane Rental Management System</h2>
+                <p className="text-xl font-thin mb-8 leading-relaxed">
                     Streamline your crane rental operations with our comprehensive management solution. Manage contracts, inventory, customers, and maintenance all in one place.
                 </p>
                 <motion.button

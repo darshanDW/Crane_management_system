@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function AdminDashboard() {
+export default function Navbar() {
   return (
     <nav className="bg-blue-600 text-white shadow-lg">
       <div className="container mx-auto px-6 py-3">
@@ -9,15 +9,9 @@ export default function AdminDashboard() {
             Crane Rental System
           </Link>
           <div className="space-x-4">
-            <Link to="/admin/inventory" className="hover:text-blue-200">
-              Inventory
+            <Link to="/" className="hover:text-blue-200">
+              Home
             </Link>
-            <Link to="/admin/maintenance" className="hover:text-blue-200">
-              Maintenance
-            </Link>
-
-            <Link to="/quotes" className="hover:text-blue-200">contracts</Link>
-            <Link to="/admin/Contracts" className="hover:text-blue-200">Admin</Link>
           </div>
         </div>
       </div>
