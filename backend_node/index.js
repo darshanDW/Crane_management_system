@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors")
 const mainroute = require('./route/index')
 const cranespageroute = require('./route/cranespage')
+const contact_us = require('./route/api/contact_us')
 const dotenv = require('dotenv')
 // const chatroute = require('./route/chatroute')
 
@@ -24,6 +25,7 @@ app.use('/CranesPage', cranespageroute);
 // app.use('/api/chat', chatroute);
 
 
+app.use('/Contact_us', contact_us);
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 

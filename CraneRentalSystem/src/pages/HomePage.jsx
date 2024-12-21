@@ -24,6 +24,16 @@ const Homepage = () => {
         navigate('/get-started');
     };
 
+    const handleSubmit=()=>{
+
+
+
+
+
+
+        
+    }
+
     return (
         <div className="min-h-screen bg-gray-50 text-gray-900">
             <Header
@@ -222,54 +232,121 @@ const AboutSection = ({ aboutRef }) => (
         </motion.div>
     </section>
 );
+const ContactSection = ({ contactRef }) => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: '',
+    });
 
-const ContactSection = ({ contactRef }) => (
-    <section ref={contactRef} className="bg-gray-200 py-20 md:py-32">
-        <div className="container mx-auto px-4">
-            <h3 className="text-3xl md:text-5xl font-extrabold text-center mb-8">Contact Us</h3>
-            <motion.div
-                className="max-w-md mx-auto"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-            >
-                <form className="space-y-6">
-                    {[
-                        { icon: <Person className="text-gray-500" />, type: "text", placeholder: "Name" },
-                        { icon: <Email className="text-gray-500" />, type: "email", placeholder: "Email" },
-                        { icon: <Message className="text-gray-500" />, type: "textarea", placeholder: "Message", rows: 4 }
-                    ].map((field, index) => (
-                        <div key={index} className="flex items-center space-x-4">
-                            {field.icon}
-                            {field.type === "textarea" ? (
-                                <textarea
-                                    placeholder={field.placeholder}
-                                    rows={field.rows}
-                                    className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                                />
-                            ) : (
-                                <input
-                                    type={field.type}
-                                    placeholder={field.placeholder}
-                                    className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                                />
-                            )}
-                        </div>
-                    ))}
-                    <motion.button
-                        type="submit"
-                        className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        Send Message
-                    </motion.button>
-                </form>
-            </motion.div>
-        </div>
-    </section>
-);
+    const [error, setError] = useState('');
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { name, email, message } = formData;
+
+        // Validate form fields
+        if (!name || !email || !message) {
+            setError('Please fill out all fields.');
+            return;
+        }
+
+        setError('');
+
+        // API call to the backend
+        try {
+            const response = await fetch('http://localhost:3000/Contact_us', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            if (response.ok) {
+                alert('Message sent successfully!');
+                setFormData({ name: '', email: '', message: '' });
+            } else {
+                alert('Failed to send message. Please try again.');
+            }
+        } catch (err) {
+            alert('An error occurred. Please try again later.');
+        }
+    };
+
+    return (
+        <section ref={contactRef} className="bg-gray-200 py-20 md:py-32">
+            <div className="container mx-auto px-4">
+                <h3 className="text-3xl md:text-5xl font-extrabold text-center mb-8">Contact Us</h3>
+                <motion.div
+                    className="max-w-md mx-auto"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    viewport={{ once: true }}
+                >
+                    <form className="space-y-6" onSubmit={handleSubmit}>
+                        {[{
+                            icon: <Person className="text-gray-500" />,
+                            type: "text",
+                            placeholder: "Name",
+                            name: "name",
+                        },
+                        {
+                            icon: <Email className="text-gray-500" />,
+                            type: "email",
+                            placeholder: "Email",
+                            name: "email",
+                        },
+                        {
+                            icon: <Message className="text-gray-500" />,
+                            type: "textarea",
+                            placeholder: "Message",
+                            name: "message",
+                            rows: 4,
+                        }].map((field, index) => (
+                            <div key={index} className="flex items-center space-x-4">
+                                {field.icon}
+                                {field.type === "textarea" ? (
+                                    <textarea
+                                        name={field.name}
+                                        value={formData[field.name]}
+                                        onChange={handleInputChange}
+                                        placeholder={field.placeholder}
+                                        rows={field.rows}
+                                        className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                    />
+                                ) : (
+                                    <input
+                                        type={field.type}
+                                        name={field.name}
+                                        value={formData[field.name]}
+                                        onChange={handleInputChange}
+                                        placeholder={field.placeholder}
+                                        className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                                    />
+                                )}
+                            </div>
+                        ))}
+                        {error && <p className="text-red-500 text-center">{error}</p>}
+                        <motion.button
+                            type="submit"
+                            className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            Send Message
+                        </motion.button>
+                    </form>
+                </motion.div>
+            </div>
+        </section>
+    );
+};
 
 const Footer = () => (
     <footer className="bg-gray-800 text-white py-8">

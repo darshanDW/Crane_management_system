@@ -16,11 +16,12 @@ import QuoteList from './components/quotes/QuoteList';
 import ContractPreview from './components/contracts/ContractPreview';
 import SignContract from './components/contracts/SignContract';
 import Dashboard from './components/admin/Dashboard';
-
+import QueryResolve from './components/admin/QueryResolve';
 
 function App() {
   return (
     <div>
+
       <BrowserRouter>
         <Routes >
           <Route path='/' element={< Homepage />} />
@@ -28,7 +29,6 @@ function App() {
           <Route path="/signup" element={< Signup />} />
           <Route path="/signin" element={< Signin />} />
           <Route path="/CranesPage" element={< CraneList />} />
-          <Route path="/adminDashboard" element={< AdminDashboard />} />
           {/* <Route path='/get-started' element={< CraneList />} /> */}
           <Route path="/book/:id" element={<BookingForm />} />
           <Route path="/admin/inventory" element={<CraneInventory />} />
@@ -37,9 +37,12 @@ function App() {
           <Route path="/quotes" element={<QuoteList />} />
           <Route path="/contracts/:id" element={<ContractPreview />} />
           <Route path="/contracts/:id/sign" element={<SignContract />} />
-          <Route path="/admin/Contracts" element={<Dashboard />} />
+          <Route path="/adminDashboard" element={<Dashboard />} />
+          <Route path="/Quories" element={<QueryResolve />} />
+
         </Routes>
       </BrowserRouter>
+
     </div>
   )
 }

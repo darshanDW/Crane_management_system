@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import AdminDashboard from '../../pages/AdminDashboard';
 import {
   Box,
   Typography,
@@ -66,6 +67,7 @@ export default function Dashboard() {
 
   return (
     <Box sx={{ maxWidth: 1200, margin: 'auto', p: 3 }}>
+      <AdminDashboard />
       <Typography variant="h4" component="h2" gutterBottom fontWeight="bold">
         Admin Dashboard
       </Typography>

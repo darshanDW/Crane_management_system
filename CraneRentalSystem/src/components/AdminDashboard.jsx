@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from './Navbar';
 
 export default function AdminDashboard() {
   const [cranes, setCranes] = useState([]);
@@ -33,7 +34,9 @@ export default function AdminDashboard() {
   }
 
   return (
+
     <div className="container mx-auto px-4 py-8">
+    <Navbar/>
       <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">Admin Dashboard</h1>
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="overflow-x-auto">

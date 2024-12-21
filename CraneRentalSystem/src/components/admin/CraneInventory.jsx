@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import AdminDashboard from '../../pages/AdminDashboard';
 import axios from 'axios';
+
+
 import {
   Button,
   Table,
@@ -68,10 +71,12 @@ export default function CraneInventory() {
         return 'warning';
     }
   };
-
   return (
+
     <Box sx={{ maxWidth: 1200, margin: 'auto', padding: 3 }}>
+      <AdminDashboard/>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 3 }}>
+        
         <Typography variant="h4" component="h2">
           Crane Inventory
         </Typography>
